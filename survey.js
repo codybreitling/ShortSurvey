@@ -12,3 +12,8 @@
     9) Rate your overall shopping experience 1-10 -> if below a 6 ask why
     10) Have you returned any shoes? -> if yes ask why
 */
+
+const onStart = () => {
+  document.getElementById('questionTitle').style.visibility='visible';
+  document.getElementById('start-button').style.visibility='hidden';
+}

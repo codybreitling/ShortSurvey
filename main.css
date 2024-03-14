@@ -19,91 +19,117 @@
   }
   
   
-  html {
-    background-image: var(--gradient1);
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-  }
-  
-  body {
-      font-family: Arial, Helvetica, sans-serif;
-  }
-  
-  .main-card {
-    background: white;
-    width: 500px;
-    height: 500px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    border-radius: 10px;
-  }
-  
-  .title-card {
-    background: white;
-    width: 500px;
-    height: 100px;
-    position: relative;
-    bottom: 130px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    border-radius: 10px;
-  }
-  
-  h1 {
-    position: absolute;
-    margin-top: 33px;
-    margin-left: 50px;
-    background: var(--gradient1);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  
-  h2 {
-    position: absolute;
-    text-align: center;
-    top: 20px;
-    color: #1eadd1;
-  }
-  
-  /* fwd & bck buttons */
-  /* dont show button if its the first or last question */
-  .nav-button {
-    background: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 50%;
-    font-size: 24px;
-    transition-duration: 0.3s;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-  }
-  
-  .nav-button:hover {
-    background-color: #1eadd1;
-    color: white;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  }
-  
-  .nav-button:active {
-    background-color: white;
-    color: black;
-  }
-  
-  .fwd-button {
-    margin-left: 525px;
-  }
-  
-  .bck-button {
-    margin-left: -50px;
-  }
+html {
+  background-image: var(--gradient1);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.main-card {
+  background: white;
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 10px;
+}
+
+.title-card {
+  background: white;
+  width: 500px;
+  height: 100px;
+  position: relative;
+  bottom: 130px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 10px;
+}
+
+h1 {
+  position: absolute;
+  margin-top: 33px;
+  margin-left: 50px;
+  background: var(--gradient1);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h2 {
+  visibility: hidden;
+  position: absolute;
+  text-align: center;
+  top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: #1eadd1;
+}
+
+/* fwd & bck buttons */
+/* dont show button if its the first or last question */
+.nav-btn {
+  background: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 24px;
+  transition-duration: 0.3s;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.nav-btn:hover {
+  background-color: #1eadd1;
+  color: white;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.nav-btn:active {
+  background-color: white;
+  color: black;
+}
+
+.fwd-btn {
+  left: 525px;
+}
+
+.bck-btn {
+  left: -50px;
+}
+
+.start-button {
+  background: #1eadd1;
+  visibility: visible;
+  color:white;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 224px;
+  left: 112px;
+  font-size: 48px;
+  border-radius: 15px;
+}
+
+.start-button:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.start-button:active {
+  background-color: #1eadd1;
+  color: white;
+  transform: translateY(2px);
+}
   
   
