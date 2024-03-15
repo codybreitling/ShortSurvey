@@ -45,18 +45,17 @@ const onStart = () => {
   document.getElementById('bck-btn').style.opacity=0.6;
 }
 
+// disable / enable buttons
 const enableFwdBtn = () => {
   document.getElementById('fwd-btn').style.opacity=1;
   document.getElementById('fwd-btn').style.cursor='pointer';
   document.getElementById('fwd-btn').style.pointerEvents='all';  
 }
-
 const disableFwdBtn = () => {
   document.getElementById('fwd-btn').style.opacity=0.6;
   document.getElementById('fwd-btn').style.cursor='allowed';
   document.getElementById('fwd-btn').style.pointerEvents='none';  
 }
-
 const enableBckBtn = () => {
   document.getElementById('bck-btn').style.opacity=1;
   document.getElementById('bck-btn').style.cursor='pointer';
