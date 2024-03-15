@@ -1,16 +1,21 @@
 /*
   survey for store that sells shoes
   questions: 
-    1) name
-    2) age
-    3) email
-    4) address
-    5) number
-    6) How did you hear about us?
-    7) How often do you buy shoes online versus in-store?
-    8) How likely are you to shop at our store again?
-    9) Rate your overall shopping experience 1-10 -> if below a 6 ask why
-    10) Have you returned any shoes? -> if yes ask why
+    1) name                                                                                                    -> input type text
+    2) age                                                                                                     -> input type date
+    3) email                                                                                                   -> input type text
+    4) address                                                                                                 -> input type text
+    5) number                                                                                                  -> input type text
+    6) Do you want to enroll in our loyalty program for our store?                                             -> checkbox
+    7) How did you hear about us?                                                                              -> radio button & input type text
+    8) How likely are you to recommend our store to a friend or family member?                                 -> radio button 
+    9) How often do you buy shoes online versus in-store?                                                      -> radio button
+    10) How likely are you to shop at our store again?                                                         -> radio button
+    11) How often do you seek assistance from sales staff during your shopping experience?                     -> radio button
+    12) What do you consider the most important aspect when purchasing shoes                                   -> radio button
+    13) On a scale of 1 to 10, how satisfied are you with the variety of shoe styles offered in our store?     -> radio button
+    14) Rate your overall shopping experience 1-10 -> if below a 6 ask why                                     -> input type range & text area
+    15) Have you returned any shoes? -> if yes ask why                                                         -> radio button & text area
 */
 
 let questionIndex = 0;
@@ -80,7 +85,7 @@ const onFwd = () => {
   currQuestion;
   if (currQuestion === questions[1]) {
     enableBckBtn()  
-  } else if (currQuestion === questions[10]) {
+  } else if (currQuestion === questions[15]) {
     disableFwdBtn()
   }
 }
@@ -91,7 +96,7 @@ const onBck = () => {
   currQuestion;
   if (currQuestion === questions[0]) {
     disableBckBtn()
-  } else if (currQuestion === questions[9]) {
+  } else if (currQuestion === questions[14]) {
     enableFwdBtn()
   }
 }
