@@ -72,17 +72,10 @@ const disableBckBtn = () => {
 const onFwd = () => {
   questionIndex++;
   const currQuestion = document.getElementById('questionTitle').innerHTML = questions[questionIndex];
-
-  // set question title to the questions index
-  document.getElementById('questionTitle').innerHTML = questions[questionIndex]; 
-
-  // check if we are on the second question, if so, enable the bck button
+  currQuestion;
   if (currQuestion === questions[1]) {
     enableBckBtn()  
-  }
-
-  // check if we are on the submit page, if so, disable the fwd button
-  if (currQuestion === questions[10]) {
+  } else if (currQuestion === questions[10]) {
     disableFwdBtn()
   }
 }
@@ -90,17 +83,10 @@ const onFwd = () => {
 const onBck = () => {
   questionIndex--;
   const currQuestion = document.getElementById('questionTitle').innerHTML = questions[questionIndex];
-
-  // set question title to the questions index
-  document.getElementById('questionTitle').innerHTML = questions[questionIndex]; 
-
-  // check if we are on the first question, if so, disable the bck button
+  currQuestion;
   if (currQuestion === questions[0]) {
     disableBckBtn()
-  }
-
-  // check if we are on the last question, if so, enable the fwd button
-  if (currQuestion === questions[9]) {
+  } else if (currQuestion === questions[9]) {
     enableFwdBtn()
   }
 }
