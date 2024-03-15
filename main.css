@@ -65,12 +65,10 @@ h1 {
 }
 
 h2 {
-  visibility: hidden;
   position: absolute;
   text-align: center;
+  width: 100%;
   top: 20px;
-  margin-left: 10px;
-  margin-right: 10px;
   color: #1eadd1;
 }
 
@@ -79,7 +77,6 @@ h2 {
 .nav-btn {
   background: white;
   border: none;
-  cursor: pointer;
   border-radius: 50%;
   font-size: 24px;
   transition-duration: 0.3s;
@@ -102,14 +99,22 @@ h2 {
 }
 
 .fwd-btn {
+  visibility: hidden;
+  pointer-events: all;
+  cursor: pointer;
+  opacity: 1;
   left: 525px;
 }
 
 .bck-btn {
+  visibility: hidden;
+  pointer-events: none;
+  cursor: default;
+  opacity: 1;
   left: -50px;
 }
 
-.start-button {
+.start-btn {
   background: #1eadd1;
   visibility: visible;
   color:white;
@@ -122,11 +127,11 @@ h2 {
   border-radius: 15px;
 }
 
-.start-button:hover {
+.start-btn:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-.start-button:active {
+.start-btn:active {
   background-color: #1eadd1;
   color: white;
   transform: translateY(2px);
