@@ -23,16 +23,21 @@ const questions = [
   "email", 
   "address", 
   "number", 
+  "Would you be interested in participating in a loyalty program for our store?",
   "How did you hear about us?",
+  "How likely are you to recommend our store to a friend or family member?",
   "How often do you buy shoes online versus in-store?",
   "How likely are you to shop at our store again?",
-  "Rate your overall shopping experience 1-10 -> if below a 5 ask why",
+  "How often do you seek assistance from sales staff during your shopping experience?",
+  "What do you consider the most important aspect when purchasing shoes (price, comfort, style, brand reputation, etc.)?",
+  "On a scale of 1 to 10, how satisfied are you with the variety of shoe styles offered in our store?",
   "Have you returned any shoes? -> if yes ask why",
+  "Rate your overall shopping experience 1-10 -> if below a 5 ask why",
   "Submit page"
 ];
 
 const conditionalQuestions = [
-  "We are sad to hear you had a bad experience. Why was your experience bad?",
+  "We are sad to hear you had a bad experience. Please tell us why you had a bad experience.",
   "Please specify what shoes you returned and why so we can better our quality for you!"
 ];
 
