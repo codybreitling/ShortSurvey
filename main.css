@@ -31,6 +31,15 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+p {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  font-size: large;
+  font-weight: bold;
+  color: #1eadd1;
+}
+
 .main-card {
   background: white;
   width: 500px;
@@ -127,6 +136,19 @@ h2 {
   border-radius: 15px;
 }
 
+.submit-btn {
+  background: #1eadd1;
+  visibility: hidden;
+  color:white;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 224px;
+  left: 112px;
+  font-size: 48px;
+  border-radius: 15px;
+}
+
 .start-btn:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
@@ -136,5 +158,164 @@ h2 {
   color: white;
   transform: translateY(2px);
 }
-  
-  
+
+.questions {
+  visibility: hidden;
+  width: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.label-text {
+  font-size: 20px;
+  color: #1eadd1;
+  font-weight: bold;
+}
+
+.input-text {
+  width: 200px;
+  border: none;
+  border-bottom: 2px solid #1eadd1;
+  font-size: 20px;
+  font-weight: bold;
+  color: #0dda8b;
+}
+
+.input-text:focus {
+  outline: none;
+}
+
+.input-number {
+  width: 50px;
+  border: none;
+  border-bottom: 2px solid #1eadd1;
+  font-size: 20px;
+  font-weight: bold;
+  color: #0dda8b;
+}
+
+.input-number:focus {
+  outline: none;
+}
+
+input[type=checkbox] {
+  height: 15px;
+  width: 15px; 
+  cursor: pointer;
+  accent-color: #1eadd1;
+}
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 40px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  color: #1eadd1;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #1eadd1;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+ 	top: 9px;
+	left: 9px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+.otherInput {
+  /* visibility: hidden; */
+  width: 200px;
+  border: none;
+  border-bottom: 2px solid #1eadd1;
+  font-size: 20px;
+  font-weight: bold;
+  color: #0dda8b;
+}
+
+.otherInput:focus {
+  outline: none;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #1eadd1;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #1eadd1;
+  cursor: pointer;
+}
