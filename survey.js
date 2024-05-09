@@ -3,7 +3,7 @@ Cody Breitling
 Assignment: Final Project                              
 */
 
-// list of question objects
+// array of questions
 const questions = [
   {question:"Please Enter Your Name",
   id:"q0"},
@@ -60,6 +60,7 @@ const questions = [
    id:"q17"}
 ];
 
+// code that is called on start
 const onStart = () => {
   document.getElementById('questionTitle').innerHTML = questions[0].question;
 
@@ -72,6 +73,7 @@ const onStart = () => {
   document.getElementById('bck-btn').style.opacity=0.6;
 }
 
+// code that is called on submit
 const onSubmit = () => {
   document.getElementById('q17').style.visibility='hidden';
   document.getElementById('questionTitle').style.visibility='hidden';
@@ -103,6 +105,7 @@ const disableBckBtn = (bckBtn) => {
   bckBtn.style.pointerEvents='none';  
 }
 
+// function that displays the current question when called
 const displayQuestion = (currQuestion, prevQuestion) => {
   document.getElementById('questionTitle').innerHTML = currQuestion.question;
   document.getElementById(prevQuestion.id).style.visibility='hidden';
@@ -118,26 +121,29 @@ const displayQuestion = (currQuestion, prevQuestion) => {
 
 }
 
+// set question index to keep track of which question you are on
 let questionIndex = 0;
-let conditionalQuestionIndex = 0;
 
+// code that is ran when the forward button is pressed
 const onFwd = () => {
   questionIndex++;
   let currQuestion = questions[questionIndex];
   let prevQuestion = questions[questionIndex - 1]
-  // conditional question 1 checks
+
+  // first conditional question
   if ((currQuestion.id === 'q14' && document.getElementById('no-checked').checked === true && prevQuestion.id === 'q13') 
       || 
       (currQuestion.id === 'q14' && document.getElementById('no-checked').checked === false && document.getElementById('yes-checked').checked === false && prevQuestion.id === 'q13')) {
     questionIndex++;
     currQuestion = questions[questionIndex]
   }
-  // conditional question 2 checks
+
+  // second conditional question
   if (currQuestion.id === 'q16' && document.getElementById('range-two').value >= 3 && prevQuestion.id === 'q15') { 
     questionIndex++;
     currQuestion = questions[questionIndex]
   }
-  console.log(document.getElementById('range-two').value)
+
   const fwdBtn = document.getElementById('fwd-btn');
   const bckBtn = document.getElementById('bck-btn');
   displayQuestion(currQuestion, prevQuestion);
@@ -149,25 +155,28 @@ const onFwd = () => {
   }
 }
 
+// code that is ran when the back button is pressed
 const onBck = () => {
   questionIndex--;
   let currQuestion = questions[questionIndex];
   let prevQuestion = questions[questionIndex + 1]
   let isQuestion16Showing = true
-  // conditional question 1 checks
+
+  // first conditional question
   if ((currQuestion.id === 'q14' && document.getElementById('no-checked').checked === true && prevQuestion.id === 'q15') 
       || 
       (currQuestion.id === 'q14' && document.getElementById('no-checked').checked === false && document.getElementById('yes-checked').checked === false && prevQuestion.id === 'q15')) {
     questionIndex--;
     currQuestion = questions[questionIndex]
   }
-  console.log(document.getElementById('range-two').value)
-  // conditional question 2 checks
+
+  // second conditional question
   if (currQuestion.id === 'q16' && document.getElementById('range-two').value >= 3 && prevQuestion.id === 'q17') { 
     questionIndex--;
     currQuestion = questions[questionIndex]
     isQuestion16Showing = false
   }
+
   const fwdBtn = document.getElementById('fwd-btn');
   const bckBtn = document.getElementById('bck-btn');
   displayQuestion(currQuestion, prevQuestion);
@@ -183,6 +192,7 @@ const onBck = () => {
   }
 }
 
+// code that is called when the "other" option is pressed to display code for input
 const otherCheck = () => {
   if (document.getElementById('otherChecked').checked) {
     document.getElementById('ifOtherChecked').style.visibility = 'visible';
@@ -191,6 +201,7 @@ const otherCheck = () => {
   }
 }
 
+// code for the sliders
 var sliderOne = document.getElementById("range");
 var sliderTwo = document.getElementById("range-two");
 
