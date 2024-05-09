@@ -1,21 +1,6 @@
 /*
-  survey for store that sells shoes
-  questions: 
-    1) name                                                                                            
-    2) email                                                                                                
-    3) address                                                                                                
-    4) number                                                                                                
-    5) age                                                                                            
-    6) Do you want to enroll in our loyalty program for our store?                                          
-    7) How did you hear about us?                                                                            
-    8) How likely are you to recommend our store to a friend or family member?                                 
-    9) How often do you buy shoes online versus in-store?                                                     
-    10) How likely are you to shop at our store again?                                                        
-    11) How often do you seek assistance from sales staff during your shopping experience?                   
-    12) What do you consider the most important aspect when purchasing shoes                                
-    13) On a scale of 1 to 10, how satisfied are you with the variety of shoe styles offered in our store?    
-    14) Have you returned any shoes? -> if yes ask why                                                    
-    15) Rate your overall shopping experience 1-10 -> if below a 6 ask why                                 
+Cody Breitling
+Assignment: Final Project                              
 */
 
 // list of question objects
@@ -74,10 +59,6 @@ const questions = [
   {question:"Submit page",
    id:"q17"}
 ];
-
-// const conditionalQuestions = [
-  
-// ];
 
 const onStart = () => {
   document.getElementById('questionTitle').innerHTML = questions[0].question;
