@@ -20,103 +20,69 @@
 
 // list of question objects
 const questions = [
-  {question:"Please Enter Your Name:",
-  type:"text",
-  id:"q1",
-  answers: null}, 
+  {question:"Please Enter Your Name",
+  id:"q0"},
 
-  {question:"Please Enter Your Email:",
-  type:"text",
-  id:"q2", 
-  answers: null}, 
+  {question:"Please Enter Your Email",
+  id:"q1"}, 
 
-  {question:"Please Enter Your Zip Code:",
-  type:"text",
-  id:"q3", 
-  answers: null}, 
+  {question:"Please Enter Your Zip Code",
+  id:"q2"}, 
 
-  {question:"Please Enter Your Number:", 
-  type:"text",
-  id:"q4", 
-  answers: null},
+  {question:"Please Enter Your Number", 
+  id:"q3"},
   
-  {question:"Please Enter Your Age:", 
-  type:"date",
-  id:"q5", 
-  answers: null},
+  {question:"Please Enter Your Age", 
+  id:"q4"},
 
   {question:"Would you be interested in participating in a loyalty program for our store?",
-   type:"checkbox",
-   id:"q6",
-   answers: null},
+   id:"q5"},
 
   {question:"How did you hear about us?",
-   type:"radio",
-   id:"q7",
-   answers:["Friend or Family", "Advertisement", "Social Media", "Search Engine", "Email", "Other"]},
+   id:"q6"},
 
   {question:"How likely are you to recommend our store to a friend or family member?",
-   type:"radio",
-   id:"q8",
-   answers:["Very Likely", "Likely", "Maybe", "Not Likely"]},
+   id:"q7"},
 
   {question:"How often do you buy shoes online versus in-store?",
-   type:"radio",
-   id:"q9",
-   answers:["Often", "Sometimes", "Not Often", "Never"]},
+   id:"q8"},
 
   {question:"How likely are you to shop at our store again?",
-   type:"radio",
-   id:"q10",
-   answers:["Very Likely", "Likely", "Maybe", "Not Likely"]},
+   id:"q9"},
 
   {question:"How often do you seek assistance from staff during your shopping experience?",
-   type:"radio",
-   id:"q11",
-   answers:["Often", "Sometimes", "Not Often", "Never"]},
+   id:"q10"},
 
   {question:"Are the prices reasonable?",
-   type:"radio",
-   id:"q12",
-   answers:["Yes", "Somewhat", "No"]},
+   id:"q11"},
 
-  {question:"On a scale of 1 to 10, how satisfied are you with the variety of shoe styles offered in our store?",
-   type:"range",
-   id:"q13",
-   answers: null},
+  {question:"On a scale of 1 to 5, how satisfied are you with the variety of shoe styles offered in our store?",
+   id:"q12"},
 
-  {question:"Have you returned any shoes? -> if yes ask why", 
-  type:"radio",
-  id:"q14", 
-  answers:["Yes", "No"]},
-
-  {question:"Rate your overall shopping experience 1-10 -> if below a 5 ask why",
-   type:"range",
-   id:"q15",
-   answers: null},
-
-  {question:"Submit page",
-   type:"button",
-   id:"q16",
-   answers: null}
-];
-
-const conditionalQuestions = [
-  {question:"We are sad to hear you had a bad experience. Please tell us why you had a bad experience.",
-   type:"text-box",
-   id:"q17",
-   answers: null},
+  {question:"Have you returned any shoes?", 
+  id:"q13"},
 
   {question:"Please specify what shoes you returned and why so we can better our quality for you!",
-   type:"text-box",
-   id:"q18",
-   answers: null}
+   id:"q14"},
+
+  {question:"Rate your overall shopping experience 1-5",
+   id:"q15"},
+
+   {question:"We are sorry to hear you had a bad experience. Please tell us why you had a bad experience.",
+   id:"q16"},
+
+  {question:"Submit page",
+   id:"q17"}
 ];
+
+// const conditionalQuestions = [
+  
+// ];
 
 const onStart = () => {
   document.getElementById('questionTitle').innerHTML = questions[0].question;
 
-  document.getElementById('q1').style.visibility='visible';
+  document.getElementById('q0').style.visibility='visible';
 
   document.getElementById('start-button').style.visibility='hidden';
 
@@ -126,7 +92,7 @@ const onStart = () => {
 }
 
 const onSubmit = () => {
-  document.getElementById('q16').style.visibility='hidden';
+  document.getElementById('q17').style.visibility='hidden';
   document.getElementById('questionTitle').style.visibility='hidden';
   document.getElementById('fwd-btn').style.visibility='hidden';
   document.getElementById('bck-btn').style.visibility='hidden';
@@ -160,13 +126,15 @@ const displayQuestion = (currQuestion, prevQuestion) => {
   document.getElementById('questionTitle').innerHTML = currQuestion.question;
   document.getElementById(prevQuestion.id).style.visibility='hidden';
   document.getElementById(currQuestion.id).style.visibility='visible';
-  let isQuestion7 = currQuestion.id == 'q7';
-  if (prevQuestion.id === 'q7' && document.getElementById('otherChecked').checked === true) {
+  let isQuestion7 = currQuestion.id == 'q6';
+  if (prevQuestion.id === 'q6' && document.getElementById('otherChecked').checked === true) {
     document.getElementById('ifOtherChecked').style.visibility = 'hidden';
   }
   if (isQuestion7 && document.getElementById('otherChecked').checked === true) {
     document.getElementById('ifOtherChecked').style.visibility = 'visible';
+  
   }
+
 }
 
 let questionIndex = 0;
@@ -174,30 +142,62 @@ let conditionalQuestionIndex = 0;
 
 const onFwd = () => {
   questionIndex++;
-  const currQuestion = questions[questionIndex];
-  const prevQuestion = questions[questionIndex - 1]
+  let currQuestion = questions[questionIndex];
+  let prevQuestion = questions[questionIndex - 1]
+  // conditional question 1 checks
+  if ((currQuestion.id === 'q14' && document.getElementById('no-checked').checked === true && prevQuestion.id === 'q13') 
+      || 
+      (currQuestion.id === 'q14' && document.getElementById('no-checked').checked === false && document.getElementById('yes-checked').checked === false && prevQuestion.id === 'q13')) {
+    questionIndex++;
+    currQuestion = questions[questionIndex]
+  }
+  // conditional question 2 checks
+  if (currQuestion.id === 'q16' && document.getElementById('range-two').value >= 3 && prevQuestion.id === 'q15') { 
+    questionIndex++;
+    currQuestion = questions[questionIndex]
+  }
+  console.log(document.getElementById('range-two').value)
   const fwdBtn = document.getElementById('fwd-btn');
   const bckBtn = document.getElementById('bck-btn');
   displayQuestion(currQuestion, prevQuestion);
 
   if (currQuestion.question === questions[1].question) {
     enableBckBtn(bckBtn)  
-  } else if (currQuestion.question === questions[15].question) {
+  } else if (currQuestion.question === questions[17].question) {
     disableFwdBtn(fwdBtn)
   }
 }
 
 const onBck = () => {
   questionIndex--;
+  let currQuestion = questions[questionIndex];
+  let prevQuestion = questions[questionIndex + 1]
+  let isQuestion16Showing = true
+  // conditional question 1 checks
+  if ((currQuestion.id === 'q14' && document.getElementById('no-checked').checked === true && prevQuestion.id === 'q15') 
+      || 
+      (currQuestion.id === 'q14' && document.getElementById('no-checked').checked === false && document.getElementById('yes-checked').checked === false && prevQuestion.id === 'q15')) {
+    questionIndex--;
+    currQuestion = questions[questionIndex]
+  }
+  console.log(document.getElementById('range-two').value)
+  // conditional question 2 checks
+  if (currQuestion.id === 'q16' && document.getElementById('range-two').value >= 3 && prevQuestion.id === 'q17') { 
+    questionIndex--;
+    currQuestion = questions[questionIndex]
+    isQuestion16Showing = false
+  }
   const fwdBtn = document.getElementById('fwd-btn');
   const bckBtn = document.getElementById('bck-btn');
-  const currQuestion = questions[questionIndex];
-  const prevQuestion = questions[questionIndex + 1]
   displayQuestion(currQuestion, prevQuestion);
 
   if (currQuestion.question === questions[0].question) {
     disableBckBtn(bckBtn)
-  } else if (currQuestion.question === questions[14].question) {
+  } else if ( isQuestion16Showing === false) {
+    if (currQuestion.question === questions[15].question) {
+      enableFwdBtn(fwdBtn)
+    }
+  } else if (currQuestion.question === questions[16].question) {
     enableFwdBtn(fwdBtn)
   }
 }
