@@ -60,25 +60,30 @@ const questions = [
    id:"q17"}
 ];
 
+// setting some commonly used stuff
+const fwdBtn = document.getElementById('fwd-btn');
+const bckBtn = document.getElementById('bck-btn');
+const questionTitle = document.getElementById('questionTitle');
+
 // code that is called on start
 const onStart = () => {
-  document.getElementById('questionTitle').innerHTML = questions[0].question;
+  questionTitle.innerHTML = questions[0].question;
 
   document.getElementById('q0').style.visibility='visible';
 
   document.getElementById('start-button').style.visibility='hidden';
 
-  document.getElementById('fwd-btn').style.visibility='visible';
-  document.getElementById('bck-btn').style.visibility='visible';
-  document.getElementById('bck-btn').style.opacity=0.6;
+  fwdBtn.style.visibility='visible';
+  bckBtn.style.visibility='visible';
+  bckBtn.style.opacity=0.6;
 }
 
 // code that is called on submit
 const onSubmit = () => {
   document.getElementById('q17').style.visibility='hidden';
-  document.getElementById('questionTitle').style.visibility='hidden';
-  document.getElementById('fwd-btn').style.visibility='hidden';
-  document.getElementById('bck-btn').style.visibility='hidden';
+  questionTitle.style.visibility='hidden';
+  fwdBtn.style.visibility='hidden';
+  bckBtn.style.visibility='hidden';
   document.getElementById('results').style.visibility='visible';
 }
 
@@ -107,14 +112,16 @@ const disableBckBtn = (bckBtn) => {
 
 // function that displays the current question when called
 const displayQuestion = (currQuestion, prevQuestion) => {
-  document.getElementById('questionTitle').innerHTML = currQuestion.question;
+  questionTitle.innerHTML = currQuestion.question;
   document.getElementById(prevQuestion.id).style.visibility='hidden';
   document.getElementById(currQuestion.id).style.visibility='visible';
-  let isQuestion7 = currQuestion.id == 'q6';
+
+  // code for the "other" option
+  let isQuestion6 = currQuestion.id == 'q6';
   if (prevQuestion.id === 'q6' && document.getElementById('otherChecked').checked === true) {
     document.getElementById('ifOtherChecked').style.visibility = 'hidden';
   }
-  if (isQuestion7 && document.getElementById('otherChecked').checked === true) {
+  if (isQuestion6 && document.getElementById('otherChecked').checked === true) {
     document.getElementById('ifOtherChecked').style.visibility = 'visible';
   
   }
@@ -144,10 +151,9 @@ const onFwd = () => {
     currQuestion = questions[questionIndex]
   }
 
-  const fwdBtn = document.getElementById('fwd-btn');
-  const bckBtn = document.getElementById('bck-btn');
   displayQuestion(currQuestion, prevQuestion);
 
+  // enable / disable the forward and back buttons
   if (currQuestion.question === questions[1].question) {
     enableBckBtn(bckBtn)  
   } else if (currQuestion.question === questions[17].question) {
@@ -177,10 +183,9 @@ const onBck = () => {
     isQuestion16Showing = false
   }
 
-  const fwdBtn = document.getElementById('fwd-btn');
-  const bckBtn = document.getElementById('bck-btn');
   displayQuestion(currQuestion, prevQuestion);
 
+  // enable / disable the forward and back buttons
   if (currQuestion.question === questions[0].question) {
     disableBckBtn(bckBtn)
   } else if ( isQuestion16Showing === false) {
