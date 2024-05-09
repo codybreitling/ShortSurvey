@@ -87,8 +87,6 @@ h2 {
   color: #1eadd1;
 }
 
-/* fwd & bck buttons */
-/* dont show button if its the first or last question */
 .nav-btn {
   background: white;
   border: none;
