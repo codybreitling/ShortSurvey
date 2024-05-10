@@ -80,6 +80,14 @@ let currentSurvey = {};
 // setting an array to hold all of the survey response objects
 const surveys = [];
 
+// get the 1st slider elements
+let sliderOne = document.getElementById("range");
+let outputOne = document.getElementById("range-value");
+
+// get the 2nd slider elements
+let sliderTwo = document.getElementById("range-two");
+let outputTwo = document.getElementById("range-value-two");
+
 // code that is called on start
 const onStart = () => {
   currentSurvey = {};
@@ -91,6 +99,8 @@ const onStart = () => {
   document.getElementById('start-button').style.visibility='hidden';
   fwdBtn.style.visibility='visible';
   bckBtn.style.visibility='visible';
+  outputOne.innerHTML = "3/5";
+  outputTwo.innerHTML = "3/5";
   enableFwdBtn(fwdBtn);
   disableBckBtn(bckBtn);
 }
@@ -99,15 +109,7 @@ const onStart = () => {
 const onSubmit = () => {
   isSubmitButtonPressed = true;
 
-  // edit elements
-  document.getElementById('scrollable').style.visibility='visible';
-  document.getElementById('reset-btn').style.visibility='visible';
-  document.getElementById('q17').style.visibility='hidden';
-  questionTitle.style.visibility='hidden';
-  fwdBtn.style.visibility='hidden';
-  bckBtn.style.visibility='hidden';
-  document.getElementById('resultsHeading').style.visibility='visible';
-
+  
   // setting answers and trimming them
   let name = document.getElementById('q0-input').value;
   name = name.trim();
@@ -117,8 +119,8 @@ const onSubmit = () => {
   zip = zip.trim();
   let phone = document.getElementById('q3-input').value;
   phone = phone.trim();
-  const age = document.getElementById('q4-input').value;
-
+  let age = document.getElementById('q4-input').value;
+  
   // setting the rest of answers to empty strings so they can be edited later
   let loyaltyProgram = '';
   let reference = '';
@@ -130,21 +132,21 @@ const onSubmit = () => {
   let howSatisfiedWithVariety = '';
   let returnedAnyShoes = '';
   let overall = '';
-
+  
   // setting answerId and answer to be able to easier get the users answers
   let answerId = '';
   let answer = null;
-
+  
   // setting loyaltyProgram to a readable format
-  const loyaltyProgramChecked = document.getElementById('q4-input').checked;
+  let loyaltyProgramChecked = document.getElementById('q4-input').checked;
   if (loyaltyProgramChecked) {
     loyaltyProgram = 'Enrolled';
   } else {
     loyaltyProgram = 'Not enrolled';
   }
-
+  
   // setting the refference question to what was answered by the user
-    // check if the other answers were chosen (not the "other" option)
+  // check if the other answers were chosen (not the "other" option)
   for (let x = 1; x < 5; x++) {
     answerId = 'a' + x;
     answer = document.getElementById(answerId);
@@ -152,12 +154,12 @@ const onSubmit = () => {
       reference = answer.value;
     }
   }
-    // if reference has no value, that means "option" option must be selected since we already tested if the questions were answered or not
+  // if reference has no value, that means "option" option must be selected since we already tested if the questions were answered or not
   if (reference === '') {
     reference = document.getElementById('ifOtherChecked').value;
     reference = reference.trim();
   }
-
+  
   // setting the recommend question to what was answered by the user
   for (let x = 5; x < 9; x++) {
     answerId = 'a' + x;
@@ -166,7 +168,7 @@ const onSubmit = () => {
       recommend = answer.value;
     }
   }
-
+  
   // setting the onlineOrInStore question to what was answered by the user
   for (let x = 9; x < 13; x++) {
     answerId = 'a' + x;
@@ -175,7 +177,7 @@ const onSubmit = () => {
       onlineOrInStore = answer.value;
     }
   }
-
+  
   // setting the likelyToComeBack question to what was answered by the user
   for (let x = 13; x < 17; x++) {
     answerId = 'a' + x;
@@ -184,7 +186,7 @@ const onSubmit = () => {
       likelyToComeBack = answer.value;
     }
   }
-
+  
   // setting the seekAssistance question to what was answered by the user
   for (let x = 17; x < 21; x++) {
     answerId = 'a' + x;
@@ -193,7 +195,7 @@ const onSubmit = () => {
       seekAssistance = answer.value;
     }
   }
-
+  
   // setting the reasonablePrices question to what was answered by the user
   for (let x = 21; x < 24; x++) {
     answerId = 'a' + x;
@@ -202,25 +204,25 @@ const onSubmit = () => {
       reasonablePrices = answer.value;
     }
   }
-
+  
   // setting the howSatisfiedWithVariety question with what the slider was set to by the user
   howSatisfiedWithVariety = document.getElementById('range').value + '/' + '5';
-
+  
   // setting the returnedAnyShoes question with what was answered by the user (if yes was checked, include the explanation. else, do not include it)
   if (document.getElementById('yes-checked').checked) {
     returnedAnyShoes = "Yes, " + document.getElementById('conditional-question-1').value.trim();
   } else if (document.getElementById('no-checked').checked) {
     returnedAnyShoes = 'No';
   }
-
+  
   // setting the overall question with what the slider was set to (if it is below 3, include the explanation. else, do not)
   let range2Value = document.getElementById('range-two').value;
   if (range2Value >= 3) {
-    overall = range2Value + "/ 5";
+    overall = range2Value + "/5";
   } else {
     overall = range2Value + "/" + "5, " + document.getElementById('conditional-question-2').value.trim();
   }
-
+  
   // storing all answers into the current survey object
   currentSurvey = {
     name,
@@ -240,14 +242,158 @@ const onSubmit = () => {
     overall
   };
 
+  // calls a function that validates the users answers
+  // if the function returns false, display an error message and return
+  let answersAreValid = validateAnswers(currentSurvey);
+  if (!answersAreValid) {
+    return;
+  }
+
+  // edit elements
+  document.getElementById('scrollable').style.visibility='visible';
+  document.getElementById('reset-btn').style.visibility='visible';
+  document.getElementById('q17').style.visibility='hidden';
+  questionTitle.style.visibility='hidden';
+  fwdBtn.style.visibility='hidden';
+  bckBtn.style.visibility='hidden';
+  document.getElementById('resultsHeading').style.visibility='visible';
+
   // putting the current survey object into the array of surveys completed
   surveys.push(currentSurvey);
   
   // putting the surveys array into localStorage
   localStorage.setItem('surveys', JSON.stringify(surveys));
-
+  
   // calling a function that displays all of the surveys
-  displaySurveyResponses()
+  displaySurveyResponses();
+}
+
+// code that is called to validate the current surveys answers
+const validateAnswers = (currentSurvey) => {
+  let error = []; // set an array that will hold all errors
+
+  // check name
+  if (currentSurvey.name === "") {
+    error.push("Name Field is Blank");
+  }
+
+  // check email
+  if (currentSurvey.email === "") {
+    error.push("Email Field is Blank");
+  } else if (!currentSurvey.email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+    error.push("Invalid Email");
+  }
+
+  // check zip code
+  if (currentSurvey.zip === "") {
+    error.push("Zip Code Field is Blank");
+  } else if (!currentSurvey.zip.match(/^\d{5}(-\d{4})?$/)) {
+    error.push("Invalid Zip Code");
+  }
+
+  // check phone number
+  if (currentSurvey.phone === "") {
+    error.push("Phone Number Field is Blank");
+  } else if (!currentSurvey.phone.match(/^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/)) {
+    error.push("Invalid Phone Number");
+  }
+
+  // check age
+  if (currentSurvey.age === "") {
+    error.push("Age Field is Blank");
+  } else if (currentSurvey.age < 0) {
+    error.push("Age Field Cannot be Negative");
+  }
+
+  // check the reference question
+  if (document.getElementById('otherChecked').checked === true && document.getElementById('ifOtherChecked').value === "") {
+    error.push("Other was not Specified On Question 7");
+  } else if (currentSurvey.reference === "") {
+    error.push("Nothing Selected on the 7th Question");
+  }
+
+  // check the recommendation question
+  if (currentSurvey.recommend === "") {
+    error.push("Nothing Selected on the 8th Question");
+  }
+
+  // check the shop online question
+  if (currentSurvey.onlineOrInStore === "") {
+    error.push("Nothing Selected on the 9th Question");
+  }
+
+  // check the how likely to come back question
+  if (currentSurvey.likelyToComeBack === "") {
+    error.push("Nothing Selected on the 10th Question");
+  }
+
+  // check the seek assistance question
+  if (currentSurvey.seekAssistance === "") {
+    error.push("Nothing Selected on the 11th Question");
+  }
+
+  // check the reasonable prices question
+  if (currentSurvey.reasonablePrices === "") {
+    error.push("Nothing Selected on the 12th Question");
+  }
+
+  // check the returned any shoes question
+  if (currentSurvey.returnedAnyShoes === "") {
+    error.push("Nothing Selected on the 14th Question");
+  } else if (document.getElementById('yes-checked').checked === true && document.getElementById('conditional-question-1').value === "") {
+    error.push("No Input given on the 15th Question");
+  }
+
+  // if overall shopping experience was below a 3, check the input in the conditional question
+  if (document.getElementById('range-two').value < 3 && document.getElementById('conditional-question-2').value === "") {
+    error.push("No Input given on the 17th Question");
+  }
+
+
+  // check for errors, if none return false, else return true
+  if (error.length === 0) {
+    return true;
+  } else {
+    displayErrors(error);
+    return false;
+  }
+}
+
+// code that is called to display the errors if there are any
+const displayErrors = (error) => {
+  // get the ul tag
+  const errorList = document.getElementById('errorList');
+  errorList.innerHTML = '';
+  
+  // loop through and add each answer out of the survey array to the list
+  for (let x = 0; x < error.length; x++) {
+    const e = error[x];
+    const listItem = document.createElement('li');
+    listItem.textContent = e;
+    listItem.dataset.index = x;
+    listItem.style.cursor="default";
+    errorList.appendChild(listItem);
+  }
+
+  // edit elements
+  bckBtn.style.visibility='hidden';
+  fwdBtn.style.visibility='hidden';
+  document.getElementById('scrollable3').style.visibility='visible';
+  document.getElementById('q17').style.visibility='hidden';
+  questionTitle.style.visibility='hidden';
+  document.getElementById('errorHeading').style.visibility='visible';
+  document.getElementById('error-back-button').style.visibility='visible';
+}
+
+const backToSubmitPage = () => {
+  // edit elements
+  bckBtn.style.visibility='visible';
+  fwdBtn.style.visibility='visible';
+  document.getElementById('scrollable3').style.visibility='hidden';
+  document.getElementById('q17').style.visibility='visible';
+  questionTitle.style.visibility='visible';
+  document.getElementById('errorHeading').style.visibility='hidden';
+  document.getElementById('error-back-button').style.visibility='hidden';
 }
 
 // code that is called when the survey is submitted to display all survey responses
@@ -255,7 +401,7 @@ const displaySurveyResponses = () => {
   // get the ul tag
   const responsesList = document.getElementById('responsesList')
   responsesList.innerHTML = '';
-
+  
   // loop through and add each survey out of the surveys array to the list
   for (let x = 0; x < surveys.length; x++) {
     const survey = surveys[x];
@@ -319,7 +465,6 @@ const showSurveyDetails = (event) => {
       const listItem = document.createElement('li');
       listItem.textContent = response;
       listItem.dataset.index = x;
-      styleListItem(listItem);
       listItem.style.cursor="default";
       responseList.appendChild(listItem);
   }
@@ -495,33 +640,27 @@ const disableBckBtn = (bckBtn) => {
 
 // code that is called when the an option is pressed from q6 to decide to display the code for the input or not
 const otherCheck = () => {
-  if (document.getElementById('otherChecked').checked) {
+  try {
+    if (!document.getElementById('otherChecked').checked) throw "Not Checked";
     document.getElementById('ifOtherChecked').style.visibility = 'visible';
-  } else {
+  } catch(err) {
+    console.log(err);
     document.getElementById('ifOtherChecked').style.visibility = 'hidden';
+  } finally {
+    return;
   }
 }
 
-// get the 1st slider elements
-var sliderOne = document.getElementById("range");
-var outputOne = document.getElementById("range-value");
-
-// get the 2nd slider elements
-var sliderTwo = document.getElementById("range-two");
-var outputTwo = document.getElementById("range-value-two");
-
-// concat the sliders value with /5
-outputOne.innerHTML = sliderOne.value + "/5";
-outputTwo.innerHTML = sliderTwo.value + "/5";
-
-// anonomys function for the 1st slider
-sliderOne.oninput = function() {
-  outputOne.innerHTML = this.value + "/" + "5";
+// code that is called when slider one is moved
+const sliderOneMove = () => {
+  outputOne = document.getElementById("range-value");
+  outputOne.innerHTML = sliderOne.value + "/5";
 }
 
-// anonomys function for the 2nd slider
-sliderTwo.oninput = function() {
-  outputTwo.innerHTML = this.value + "/" + "5";
+// code that is called when slider two is moved
+const sliderTwoMove = () => {
+  outputTwo = document.getElementById("range-value-two");
+  outputTwo.innerHTML = sliderTwo.value + "/5";
 }
 
 // Load stored surveys from localStorage

@@ -394,6 +394,14 @@ input[type=checkbox] {
   margin-top: -300px;
 }
 
+.scrollable3 {
+  visibility: hidden;
+  height: 300px;
+  resize: none;
+  overflow-y: scroll;
+  margin-top: -300px;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 15px;
@@ -434,6 +442,29 @@ input[type=checkbox] {
 }
 
 .result-back-button:active {
+  background-color: #1eadd1;
+  color: white;
+  transform: translateY(2px);
+}
+
+.error-back-button {
+  background: #1eadd1;
+  visibility: hidden;
+  color:white;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 40px;
+  left: 50px;
+  font-size: 24px;
+  border-radius: 15px;
+}
+
+.error-back-button:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.error-back-button:active {
   background-color: #1eadd1;
   color: white;
   transform: translateY(2px);
