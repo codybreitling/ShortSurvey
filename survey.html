@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 
 <!--
+
 Cody Breitling
 Assignment: Final Project                                                        
+
 -->
 
 <html>
@@ -22,214 +24,236 @@ Assignment: Final Project
 
     <!-- title card -->
     <div class="title-card">
-      <h1>Customer Feedback Form</h1>
+      <h1 class="survey-page-h1">Customer Feedback Form</h1>
     </div>
+
     
-    <!-- start survey -->
-    <button class="start-btn" id="start-button" onclick="onStart()">Start Survey</button>
-    
-    <!-- question title -->
-    <h2 id="questionTitle"></h2>
+    <form id="surveyForm">
+      <!-- start survey -->
+      <button type="button" class="start-btn" id="start-button" onclick="onStart()">Start Survey</button>
 
-    <!-- questions -->
-      <!-- name -->
-      <div class="questions" id="q0">
-        <label class="label-text">Name:</label>
-        <input type="text" class="input-text" name="name">
-      </div>
+      <!-- button to view past survey results if user has clicked "Take the Survey Again" -->
+      <button type="button" class="view-past-surveys" id="view-past-surveys" onclick="viewResultsFromQuestions()">Results Page</button>
 
-      <!-- email -->
-      <div class="questions" id="q1">
-        <label class="label-text">Email:</label>
-        <input type="text" class="input-text" name="email">
-      </div>
-
-      <!-- zip -->
-      <div class="questions" id="q2">
-        <label class="label-text">Zip Code:</label>
-        <input type="text" class="input-text" name="zip">
-      </div>
-
-      <!-- number -->
-      <div class="questions" id="q3">
-        <label class="label-text">Phone Number:</label>
-        <input type="text" class="input-text" name="number">
-      </div>
-
-      <!-- age -->
-      <div class="questions" id="q4">
-        <label class="label-text">Age:</label>
-        <input type="number" class="input-number" name="age">
-      </div>
-
-      <!-- loyalty program -->
-      <div class="questions" id="q5">
-        <label class="label-text">Check the box to be enrolled!</label>
-        <input type="checkbox" class="input-check">
-      </div>
-
-      <!-- Reference -->
-      <div class="questions" id="q6">
-        <label class="container">Friend or Family
-          <input type="radio" name="q6" onclick="otherCheck()">
-          <span class="checkmark"></span>
-        </label>
-        <label class="container">Advertisement
-          <input type="radio" name="q6" onclick="otherCheck()">
-          <span class="checkmark"></span>
-        </label>
-        <label class="container">Social Media
-          <input type="radio" name="q6" onclick="otherCheck()">
-          <span class="checkmark"></span>
-        </label>
-        <label class="container">Search Engine
-          <input type="radio" name="q6" onclick="otherCheck()">
-          <span class="checkmark"></span>
-        </label>
-        <label class="container">Other
-          <input id="otherChecked" type="radio" name="q6" onclick="otherCheck()">
-          <span class="checkmark"></span>
-        </label>
-        <input id="ifOtherChecked" type="text" class="otherInput" placeholder="Enter here" style="visibility: hidden"/>
-      </div>
-
-      <!-- recommend -->
-      <div class="questions" id="q7">
-        <label class="container">Very Likely
-          <input type="radio" name="q7">
-          <span class="checkmark"></span>
-        </label>
-        <label class="container">Likely
-          <input type="radio" name="q7">
-          <span class="checkmark"></span>
-        </label>
-        <label class="container">Maybe
-          <input type="radio" name="q7">
-          <span class="checkmark"></span>
-        </label>
-        <label class="container">Not Likely
-          <input type="radio" name="q7">
-          <span class="checkmark"></span>
-        </label>
-      </div>
-
-      <!-- online vs in-store -->
-      <div class="questions" id="q8">
-        <label class="container">Often
-          <input type="radio" name="q8">
-          <span class="checkmark"></span>
-        </label>
-        <label class="container">Sometimes
-          <input type="radio" name="q8">
-          <span class="checkmark"></span>
-        </label>
-        <label class="container">Not Often
-          <input type="radio" name="q8">
-          <span class="checkmark"></span>
-        </label>
-        <label class="container">Never
-          <input type="radio" name="q8">
-          <span class="checkmark"></span>
-        </label>
-      </div>
+      <!-- button that brings you back to the questions if you are coming from checking the results mid survey -->
+      <button type="button" class="backToQuestionsBtn" id="backToQuestionsBtn" onclick="backToQuestions()">Back To Questions</button>
       
-      <!-- shop again -->
-      <div class="questions" id="q9">
-        <label class="container">Very Likely
-          <input type="radio" name="q9">
-          <span class="checkmark"></span>
-        </label>
-        <label class="container">Likely
-          <input type="radio" name="q9">
-          <span class="checkmark"></span>
-        </label>
-        <label class="container">Maybe
-          <input type="radio" name="q9">
-          <span class="checkmark"></span>
-        </label>
-        <label class="container">Not Likely
-          <input type="radio" name="q9">
-          <span class="checkmark"></span>
-        </label>
-      </div>
+      <!-- question title -->
+      <h2 id="questionTitle"></h2>
+    
+      <!-- questions -->
+        <!-- name -->
+        <div class="questions" id="q0">
+          <label class="label-text">Name:</label>
+          <input id="q0-input" type="text" class="input-text" name="name">
+        </div>
 
-      <!-- seek assistance -->
-      <div class="questions" id="q10">
-        <label class="container">Often
-          <input type="radio" name="q10">
-          <span class="checkmark"></span>
-        </label>
-        <label class="container">Sometimes
-          <input type="radio" name="q10">
-          <span class="checkmark"></span>
-        </label>
-        <label class="container">Not Often
-          <input type="radio" name="q10">
-          <span class="checkmark"></span>
-        </label>
-        <label class="container">Never
-          <input type="radio" name="q10">
-          <span class="checkmark"></span>
-        </label>
-      </div>
+        <!-- email -->
+        <div class="questions" id="q1">
+          <label class="label-text">Email:</label>
+          <input id="q1-input" type="text" class="input-text" name="email">
+        </div>
 
-      <!-- prices -->
-      <div class="questions" id="q11">
-        <label class="container">Yes
-          <input type="radio" name="q10">
-          <span class="checkmark"></span>
-        </label>
-        <label class="container">Somewhat
-          <input type="radio" name="q10">
-          <span class="checkmark"></span>
-        </label>
-        <label class="container">No
-          <input type="radio" name="q10">
-          <span class="checkmark"></span>
-        </label>
-      </div>
+        <!-- zip -->
+        <div class="questions" id="q2">
+          <label class="label-text">Zip Code:</label>
+          <input id="q2-input" type="text" class="input-text" name="zip">
+        </div>
 
-      <!-- satisfied -->
-      <div class="questions" id="q12">
-        <input type="range" min="1" max="5" value="3" class="slider" id="range">
-        <p id="range-value"></p>
-      </div>
+        <!-- number -->
+        <div class="questions" id="q3">
+          <label class="label-text">Phone Number:</label>
+          <input id="q3-input" type="text" class="input-text" name="number">
+        </div>
 
-      <!-- returned -->
-      <div class="questions" id="q13">
-        <label class="container">Yes
-          <input id="yes-checked" type="radio" name="q13">
-          <span class="checkmark"></span>
-        </label>
-        <label class="container">No
-          <input id="no-checked" type="radio" name="q13">
-          <span class="checkmark"></span>
-        </label>
-      </div>
+        <!-- age -->
+        <div class="questions" id="q4">
+          <label class="label-text">Age:</label>
+          <input id="q4-input" type="number" class="input-number" name="age">
+        </div>
 
-      <!-- conditional question if yes -->
-      <div class="questions" id="q14">
-        <textarea name="conditional1" id="conditional-question-1" class="conditionalQuestion" placeholder="Enter here"></textarea>
-      </div>
+        <!-- loyalty program -->
+        <div class="questions" id="q5">
+          <label class="label-text">Check the box to be enrolled!</label>
+          <input id="q5-input" type="checkbox" class="input-check">
+        </div>
 
-      <!-- overall -->
-      <div class="questions" id="q15">
-        <input type="range" min="1" max="5" value="3" class="slider" id="range-two">
-        <p id="range-value-two"></p>
-      </div>
+        <!-- Reference (using an other check to decide whether or not to show the input) -->
+        <div class="questions" id="q6">
+          <label class="container">Friend or Family
+            <input id="a1" type="radio" name="q6" onclick="otherCheck()" value="Friend or Family">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Advertisement
+            <input id="a2" type="radio" name="q6" onclick="otherCheck()" value="Advertisement">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Social Media
+            <input id="a3" type="radio" name="q6" onclick="otherCheck()" value="Social Media">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Search Engine
+            <input id="a4" type="radio" name="q6" onclick="otherCheck()" value="Search Engine">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Other
+            <input id="otherChecked" type="radio" name="q6" onclick="otherCheck()">
+            <span class="checkmark"></span>
+          </label>
+          <input id="ifOtherChecked" type="text" class="otherInput" placeholder="Enter here" style="visibility: hidden"/>
+        </div>
 
-      <!-- conditional question if below 3 -->
-      <div class="questions" id="q16">
-        <textarea name="conditional2" id="conditional-question-2" class="conditionalQuestion" placeholder="Enter here"></textarea>
-      </div>
+        <!-- recommend -->
+        <div class="questions" id="q7">
+          <label class="container">Very Likely
+            <input id="a5" type="radio" name="q7" value="Very Likely">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Likely
+            <input id="a6" type="radio" name="q7" value="Likely">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Maybe
+            <input id="a7" type="radio" name="q7" value="Maybe">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Not Likely
+            <input id="a8" type="radio" name="q7" value="Not Likely">
+            <span class="checkmark"></span>
+          </label>
+        </div>
 
-      <!-- submit -->
-      <button class="submit-btn" id="q17" onclick="onSubmit()">Submit Survey</button>
-      <h2 class="resultPage" id="results" style="visibility: hidden">display results</h2>
+        <!-- online vs in-store -->
+        <div class="questions" id="q8">
+          <label class="container">Often
+            <input id="a9" type="radio" name="q8" value="Often">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Sometimes
+            <input id="a10" type="radio" name="q8" value="Sometimes">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Not Often
+            <input id="a11" type="radio" name="q8" value="Not Often">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Never
+            <input id="a12" type="radio" name="q8" value="Never">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        
+        <!-- shop again -->
+        <div class="questions" id="q9">
+          <label class="container">Very Likely
+            <input id="a13" type="radio" name="q9" value="Very Likely">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Likely
+            <input id="a14" type="radio" name="q9" value="Likely">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Maybe
+            <input id="a15" type="radio" name="q9" value="Maybe">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Not Likely
+            <input id="a16" type="radio" name="q9" value="Not Likely">
+            <span class="checkmark"></span>
+          </label>
+        </div>
 
-    <!-- forward and backwords buttons -->
-    <button class="nav-btn fwd-btn" id="fwd-btn" onclick="onFwd()">&gt;</button>
-    <button class="nav-btn bck-btn" id="bck-btn" onclick="onBck()">&lt;</button>
+        <!-- seek assistance -->
+        <div class="questions" id="q10">
+          <label class="container">Often
+            <input id="a17" type="radio" name="q10" value="Often">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Sometimes
+            <input id="a18" type="radio" name="q10" value="Sometimes">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Not Often
+            <input id="a19" type="radio" name="q10" value="Not Often">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Never
+            <input id="a20" type="radio" name="q10" value="Never">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+
+        <!-- prices -->
+        <div class="questions" id="q11">
+          <label class="container">Yes
+            <input id="a21" type="radio" name="q11" value="Yes">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Somewhat
+            <input id="a22" type="radio" name="q11" value="Somewhat">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">No
+            <input id="a23" type="radio" name="q11" value="No">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+
+        <!-- satisfied -->
+        <div class="questions" id="q12">
+          <input type="range" min="1" max="5" value="3" class="slider" id="range">
+          <p id="range-value"></p>
+        </div>
+
+        <!-- returned -->
+        <div class="questions" id="q13">
+          <label class="container">Yes
+            <input id="yes-checked" type="radio" name="q13">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">No
+            <input id="no-checked" type="radio" name="q13">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+
+        <!-- conditional question if yes -->
+        <div class="questions" id="q14">
+          <textarea name="conditional1" id="conditional-question-1" class="conditionalQuestion" placeholder="Enter here"></textarea>
+        </div>
+
+        <!-- overall -->
+        <div class="questions" id="q15">
+          <input type="range" min="1" max="5" value="3" class="slider" id="range-two">
+          <p id="range-value-two"></p>
+        </div>
+
+        <!-- conditional question if below 3 -->
+        <div class="questions" id="q16">
+          <textarea name="conditional2" id="conditional-question-2" class="conditionalQuestion" placeholder="Enter here"></textarea>
+        </div>
+
+        <!-- submit -->
+        <button type="button" class="submit-btn" id="q17" onclick="onSubmit()">Submit Survey</button>
+
+        <!-- results page (all surveys)-->
+        <h2 id="resultsHeading" style="visibility: hidden">Results</h2>
+        <div class="scrollable" id="scrollable">
+          <button type="button" class="reset-btn" id="reset-btn" onclick="onTakeSurveyAgain()">Take the Survey Again</button>
+          <ul id="responsesList"></ul>
+        </div>
+
+        <!-- single result page (one survey)-->
+        <h2 id="resultHeading"></h2>
+        <div class="scrollable2" id="scrollable2">
+          <button type="button" class="result-back-button" id="result-back-button" onclick="backToResultsPage()">Back</button>
+          <ul id="responseList"></ul>
+        </div>
+
+      <!-- forward and backwords buttons -->
+      <button type="button" class="nav-btn fwd-btn" id="fwd-btn" onclick="onFwd()">&gt;</button>
+      <button type="button" class="nav-btn bck-btn" id="bck-btn" onclick="onBck()">&lt;</button>
+    </form>
   </main>
 
 </body>
